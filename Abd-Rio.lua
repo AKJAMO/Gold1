@@ -833,7 +833,23 @@ end
 --     Source Trox     --
 function riomoned(chat_id, user_id, msg_id, text, offset, length) local tt = DevRio:get(Trox..'endmsg') or '' tdcli_function ({ ID = "SendMessage", chat_id_ = chat_id, reply_to_message_id_ = msg_id, disable_notification_ = 0, from_background_ = 1, reply_markup_ = nil, input_message_content_ = { ID = "InputMessageText", text_ = text..'\n\n'..tt, disable_web_page_preview_ = 1, clear_draft_ = 0, entities_ = {[0]={ ID="MessageEntityMentionName", offset_=offset, length_=length, user_id_=user_id }, }, }, }, dl_cb, nil) end
 --     Source Trox     --
-function ChCheck(msg)
+function ChCheck(msg) 
+local url,res = https.request('https://ccccxcc.ml/Trox/SourceCh.php?id='..msg.sender_user_id_)
+data = JSON.decode(url)
+if data.ChatMember.Trox ~= true then
+Var = false
+Text = "*᥀︙عذرا لاتستطيع استخدام البوت !\n᥀︙عليك الاشتراك في قناة السورس اولا :*"
+keyboard = {} 
+keyboard.inline_keyboard = {{{text="TeAm Trox",url="t.me/XXXZZ"}}} 
+Msg_id = msg.id_/2097152/0.5
+https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+else
+Var = true
+end
+return Var
+end
+--     Source Trox     --
+function SourceCh(msg)
 local var = true 
 if DevRio:get(Trox.."Rio:ChId") then
 local url , res = https.request('https://api.telegram.org/bot'..TokenBot..'/getchatmember?chat_id='..DevRio:get(Trox..'Rio:ChId')..'&user_id='..msg.sender_user_id_)
