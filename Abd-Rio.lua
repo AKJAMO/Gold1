@@ -1971,7 +1971,7 @@ local Rio = DataText:match('/DelTextfilter:'..tonumber(data.sender_user_id_)..'(
 DevRio:del(Trox..'Rio:Filters:'..data.chat_id_)
 Text = "*◐╿تم حذف جميع الكلمات الممنوعه بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text=" رجوع 🔙.",callback_data="/FilterList:"..data.sender_user_id_}},{{text="- اضغط هنا للمسح.",callback_data="/HideHelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text=" رجوع ??.",callback_data="/FilterList:"..data.sender_user_id_}},{{text="- اضغط هنا للمسح.",callback_data="/HideHelpList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/DelAllFilter:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -3367,7 +3367,7 @@ if SecondSudo(msg) then
 local Sudo_Welcome = '◐╿مرحبا عزيزي المطور \n◐╿انت المطور الاساسي هنا \n◐╿اليك ازرار سورس جولد \n◐╿تستطيع التحكم بكل الاوامر فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {
 {'⌯ السورس','وضع اسم البوت'},
-{' المطورين ⌯','الاحصائيات ⌯'},
+{'⌯ المطورين','الاحصائيات ⌯'},
 {'التفعيل والتعطيل ⌯','⌯ الاذاعه'},
 {'⌯ كلايش الاوامر','العام ⌯','ردود الخاص ⌯'},
 {'الاشتراك الاجباري ⌯','الاوامر الخدميه ⌯'},
@@ -5281,13 +5281,33 @@ end
 end 
 --     Source Trox     --
 if ChatType == 'sp' or ChatType == 'gp' or ChatType == 'pv' then
-if text == 'بوت' or text == 'بوتت' then 
+if text == "بوت" then
 NameBot = (DevRio:get(Trox..'Rio:NameBot') or 'جولد')
-local TroxTeam = {' كول حبيبي ؟ اني '..NameBot..' ',' وياك القميل '..NameBot..' ',' اسمي القميل '..NameBot..' '}
-DevRio2 = math.random(#TroxTeam) 
-Dev_Rio(msg.chat_id_, msg.id_, 1, TroxTeam[DevRio2] , 1, 'html') 
-return false
+local TroxTeam = { 
+'اسمي  '..Namebot..' يا قلبي 🤤💚',
+'اسمي '..Namebot..' يا روحي🙈💘',
+'اسمي  '..Namebot..' يعمري♥️',
+'اسمي  '..Namebot..' يا قمر 🐭🤤',
+'اسمي  '..Namebot..' يامزه 🥺💘',
+'اسمي  '..Namebot..' يعم 😒',
+'مقولت اسمي '..Namebot..' في اي 🙄',
+'اسمي الكيوت '..Namebot..' 🌝💘',
+'اسمي  '..Namebot..' ياحياتي🧸♥️',
+} 
+DevRio2 = TroxTeam[math.random(#TroxTeam)] 
+local msg_id = msg.id_/2097152/0.5  
+keyboard = {} 
+keyboard.inline_keyboard = {
+local function getpro(extra, result, success) 
+if result.photos_[0] then 
+https.request("https://api.telegram.org/bot"..token..'/sendPhoto?chat_id=' .. msg.chat_id_ .. '&photo='..result.photos_[0].sizes_[1].photo_.persistent_id_..'&caption=' .. URL.escape(Namebot).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
+else 
+send(msg.chat_id_, msg.id_,Namebot, 1, 'md') 
+end 
+end 
+tdcli_function ({ ID = "GetUserProfilePhotos", user_id_ = bot_id, offset_ = 0, limit_ = 1 }, getpro, nil) 
 end
+
 if text == 'اسم البوت' or text == 'البوت شنو اسمه' or text == 'شسمه البوت' or text == 'البوت شسمه' then
 NameBot = (DevRio:get(Trox..'Rio:NameBot') or 'جولد') 
 local TroxTeam = {"اسمي القميل "..NameBot.." "} 
@@ -5669,7 +5689,7 @@ name = string.gsub(name,'🌑','🌚🌚🌚🌚🌚🌑🌚🌚')
 name = string.gsub(name,'🌚','🌑🌑🌑🌑🌑🌚🌑🌑')
 name = string.gsub(name,'⭐️','🌟🌟🌟🌟🌟🌟⭐️🌟')
 name = string.gsub(name,'📥','💫💫💫📥💫💫💫💫')
-name = string.gsub(name,'⛈','🌨🌨🌨⛈🌨🌨🌨🌨')
+name = string.gsub(name,'⛈','??🌨🌨⛈🌨🌨🌨🌨')
 name = string.gsub(name,'🌥','⛅️⛅️⛅️🌥⛅️⛅️⛅️⛅️')
 name = string.gsub(name,'⛄️','☃️☃️☃️☃️⛄️☃️☃️☃️☃️')
 name = string.gsub(name,'👨‍🔬','👩‍🔬👩‍🔬👩‍🔬👩‍🔬👩‍🔬👨‍🔬👩‍🔬👩‍🔬')
@@ -6273,7 +6293,7 @@ DevRio:set(Trox..'Rio:viewget'..msg.sender_user_id_,true)
 Dev_Rio(msg.chat_id_, msg.id_, 1, '◐╿حسنا قم باعادة توجيه للمنشور الذي تريدني حساب مشاهداته', 1, 'md')
 end
 --     Source Trox     --
-if text == "سورس" and ChCheck(msg) or text == "السورس" and ChCheck(msg) or text == "يا سورس" and ChCheck(msg) or text == " ⌯ السورس" and ChCheck(msg) then
+if text == "سورس" and ChCheck(msg) or text == "السورس" and ChCheck(msg) or text == "يا سورس" and ChCheck(msg) or text == "⌯ السورس" and ChCheck(msg) then
 Text = [[
 ┎━─━─━─━─━─━─━─━─━┒
 🚨╎ 𝐖𝐞𝐥𝐜𝐨𝐦 𝐓𝐨 𝐒𝐨𝐮𝐫𝐜𝐞 𝐆𝐨𝐥𝐝.
@@ -8644,7 +8664,7 @@ Msg_id = msg.id_/2097152/0.5
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 --     Source Trox     --
-if text == "المطورين" and ChCheck(msg) or text == "المطورين ⌯" and ChCheck(msg) then 
+if text == "المطورين" and ChCheck(msg) or text == "⌯ المطورين" and ChCheck(msg) then 
 local List = DevRio:smembers(Trox..'Rio:SudoBot:')
 text = "◐╿قائمة المطورين  \n▭▭▭▭▭▭▭▭▭▭▭\n"
 for k,v in pairs(List) do
